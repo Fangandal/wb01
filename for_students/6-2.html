@@ -11,16 +11,15 @@
     /** @type{HTMLInputElement} */ let slr1 = (/** @type{HTMLInputElement} */ document.getElementById("slider1"));
     /** @type{HTMLInputElement} */ let startbutton = (/** @type{HTMLInputElement} */ document.getElementById("start"));
     /** @type{HTMLInputElement} */ let stopbutton = (/** @type{HTMLInputElement} */ document.getElementById("stop"));
-    function advanceSLR1() {
+    startbutton.onclick = function advanceSLR1() {
         // add speed, roll over to zero if we hit the max
         // note that the value of the slider is a string,
         // so we have to convert it to a number
         // The more obvious 1+"1" = "11" - thanks to JavaScripts
         // aggressive coercion rules
+        
+       
             let speed = 2;
-        stopbutton.onclick = function(){
-            let speed = 0
-        }
             let newValue = (Number(slr1.value)+speed) % 100;
             if (newValue<0) newValue=100;
             slr1.value = newValue.toString();
