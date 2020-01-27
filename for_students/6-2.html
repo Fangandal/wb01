@@ -2,10 +2,36 @@
 <html>
 
 <body>
-    <p>Put 2 buttons and a slider here</p>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <input type="range" min="0" max="100" id="slider1">
 </body>
 
 <script type="module">
-    // Put some code here
+    /** @type{HTMLInputElement} */ let slr1 = (/** @type{HTMLInputElement} */ document.getElementById("slider1"));
+    /** @type{HTMLInputElement} */ let startbutton = (/** @type{HTMLInputElement} */ document.getElementById("start"));
+    /** @type{HTMLInputElement} */ let stopbutton = (/** @type{HTMLInputElement} */ document.getElementById("stop"));
+    function advanceSLR1() {
+        // add speed, roll over to zero if we hit the max
+        // note that the value of the slider is a string,
+        // so we have to convert it to a number
+        // The more obvious 1+"1" = "11" - thanks to JavaScripts
+        // aggressive coercion rules
+        
+        startbutton.onclick = function(){
+            let speed = 2;
+        }
+        stopbutton.onclick = function(){
+            let speed = 0
+        }
+            let newValue = (Number(slr1.value)+speed) % 100;
+            if (newValue<0) newValue=100;
+            slr1.value = newValue.toString();
+            // ask for this to be called again 16ms in the future
+            window.requestAnimationFrame(advanceSLR1);
+    }
+    // note that just defined the function, now we need to call it
+    // to start the loop
+     advanceSLR1();
 </script>
 </html>

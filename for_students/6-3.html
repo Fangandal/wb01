@@ -4,12 +4,57 @@
 <body>
 
 <p>
-    Here is <span id="ex3-span">some text to make throb.</span>
+    Here is <span id="span">some text to make throb.</span>
 </p>
 
 
 <script type="module">
-    // put some code here
+    function makeBlink(id) {
+        let rate = 250;
+        let toblink = document.getElementById(id);
+        let lastBlinkTime = 0;
+        var blue = 60;
+        var red = 102;
+        var green = 2;
+        var hitMax = 0;
+        function componentToHex(c) {
+             var hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+        function rgbToHex(r, g, b) {
+            return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        }
+        function blinker() {
+            let time = performance.now();
+            if(hitMax == 0){
+                if(blue >= 250){
+                    hitMax = 1;
+                }
+                if ((time-lastBlinkTime) > rate) {
+                    lastBlinkTime = time;
+                    toblink.style.backgroundColor = rgbToHex(red, green, blue);
+                    blue += 10;
+                }
+            }
+            if(hitMax == 1){
+                if(blue <= 60){
+                    hitMax = 0;
+                }
+                if ((time-lastBlinkTime) > rate) {
+                    lastBlinkTime = time;
+                    toblink.style.backgroundColor = rgbToHex(red, green, blue);
+                    blue -= 10;
+                }
+            }
+            window.requestAnimationFrame(blinker);
+        }
+        blinker();
+    }
+
+    window.onload = function() {
+        makeBlink("span");
+
+    }
 </script>
 
 </body>
